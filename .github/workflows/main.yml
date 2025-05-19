@@ -9,15 +9,21 @@ jobs:
       name: "Build release apk"
       runs-on: ubuntu-latest
       steps:
-        - name: "Set working directory"
-          run: cd ${{ github.workspace }}
         
         - name: "Using flutter version"
           uses: subosito/flutter-action@v2
-             
+        
+        - name: check directory
+          run: echo ${{ github.workspace }}
+        - name: list folders
+          run: ls ${{ github.workspace }}
+          
         - name: "geting depenncies"
+          working-directory: ${{ github.workspace }}
           run: flutter pub get
              
         - name: "build apk release"    
+          working-directory: ${{ github.workspace }}
           run: flutter build apk --release
+
             
